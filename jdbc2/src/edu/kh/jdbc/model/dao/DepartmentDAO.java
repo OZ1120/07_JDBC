@@ -119,12 +119,200 @@ public class DepartmentDAO {
 		return deptList;
 		
 	}
+
+	/** 부서 검색
+	 * @param title
+	 * @return deptList
+	 * @throws SQLException
+	 */
+	public List<Department> selectDepartmentTitle(String title) throws SQLException {
+		
+		// 결과 저장용 변수 선언 또는객체 생성
+		List<Department> deptList = new ArrayList<Department>();
+		
+		try {
+			// 1. 커넥션 얻어오기
+			conn = getConnection(); // \JDBCTemplate.getConnection();
+			
+			// 2. SQL 작성
+			String sql = "SELECT * FROM DEPARTMENT4 \r\n" //\ 띄어쓰기 or \r\n
+					+ "WHERE DEPT_TITLE LIKE '%' || ? || '%'";
+			
+			// 3. PrepatedStatement 객체 생성 + SQL 적재
+			pstmt = conn.prepareStatement(sql);
+			
+			// 4. ?에 알맞은 값 대입
+			pstmt.setString(1, title);
+			
+			// 5. SQL(SELECT) 수행 후 결과(ResultSet)반환 받기
+			rs = pstmt.executeQuery();
+			
+			// 6. 한 행씩 접근하며 컬럼 값 얻어오기
+			// -> 얻어온 컬럼 값을 이용해 Department 객체를 생성한 후
+			//		deptList에 추가하기
+			while(rs.next()) {
+				
+				String deptId = rs.getString("DEPT_ID");
+				String deptTitle = rs.getString("DEPT_TITLE");
+				String locationId = rs.getString("LOCATION_ID");
+			
+				Department dept = new Department(deptId, deptTitle, locationId);
+				
+				deptList.add(dept);
+			}
+			
+		} finally {
+			// 7. 사용한 JDBC 객체 자원 반환
+			close(rs);
+			close(pstmt); 
+			close(conn);
+		}
+		
+		return deptList;
+	}
+	
+	/** 부서 삭제
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteDepartment(String deptId) throws SQLException {
+		
+		int result = 0;
+
+		try {
+			conn = getConnection();
+			
+			String sql = "DELETE FROM DEPARTMENT4\r\n"
+					+ "WHERE DEPT_ID = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, deptId);
+			
+			result = pstmt.executeUpdate();
+
+			if(result > 0) 	commit(conn);
+			else						rollback(conn);
+			
+		} finally {
+			close(pstmt);
+			close(conn);
+			
+		}
+		return result;
+	}
 	
 	
 	
 	
-	
-	
+	/** 부서명 변경
+	 * @param dept
+	 * @return
+	 * @throws SQLException 
+	 */
+/*	public int updateDepartment(Department dept) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "ALTER TABLE DEPARTMENT4 MODIFY DEPT_TITLE DEFAULT ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dept.getDeptTitle());
+			result = pstmt.executeUpdate();
+			
+			if(result > 0) 	commit(conn);
+			else						rollback(conn);
+			
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+		return result;
+		
+		
+	}
+*/
+
+
+	/** 부서코드가 존재 하는지 확인
+	 * @param deptId
+	 * @return
+	 * @throws SQLException
+	 */
+	public int checkDepartment(String deptId) throws SQLException {
+
+		int result = 0; // 결과 저장용 변수 선언
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "SELECT COUNT(*)  FROM DEPARTMENT4 d "
+					+ "WHERE DEPT_ID = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			// 4. ?에 알맞은 값 대입
+			pstmt.setString(1, deptId);
+			
+			// 5. SQL(SELECT) 수행 후 결과(ResultSet) 반환 받기
+			rs = pstmt.executeQuery(); // SELECT 실행
+			
+			// 6. 한 행씩 접근해서 컬럼 값 얻어오기
+			// while문 보다 if 문 사용이 좀 더 효율적!
+			// (언제?? 조회 결과가 1행만 있을 경우)
+			if(rs.next()) {
+				result = rs.getInt("COUNT(*)"); // 조회된 컬럼 명
+			//	result = rs.getInt(1); // 조회된 컬럼 순서
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 부서 수정
+	 * @param deptId
+	 * @param deptTitle
+	 * @return
+	 * @throws SQLException
+	 */
+	public int updateDepartment(String deptId, String deptTitle) throws SQLException {
+		int result = 0; // 결과 저장용 변수
+		try {
+			conn.getAutoCommit();
+			String sql 
+			= "UPDATE DEPARTMENT4 SET DEPT_TITLE = ? "
+			+ "WHERE DEPT_ID = ?";
+			
+			pstmt = conn.prepareStatement(sql); //
+			
+			pstmt.setString(1, deptTitle);
+			pstmt.setString(2, deptId);
+			
+			result = pstmt.executeUpdate();
+			
+			// 트랜잭션 제어 처리
+			if(result>0) commit (conn);
+			else rollback(conn);
+			
+			
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+		return 0; // 결과 반환
+	}
 	
 	
 	
