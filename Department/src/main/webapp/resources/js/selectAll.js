@@ -76,5 +76,31 @@ for(let btn of deleteBtnList){ // 향상된 for문
 
 }
 
+// ------------------------------------------------------------------
+
+// .update-btn 요소 모두 얻어오기
+const updateBtnList = document.querySelectorAll(".update-btn");
+
+// updateBtnList 배열의 모든 요소의 순차 접근하며 이벤트 리스너 추가
+updateBtnList.forEach( (btn,index) => {
+
+  btn.addEventListener('click', e => {
+
+    // 부모 요소중 가장 가까운 tr태그 찾기
+    // const tr = e.target.parentElement.parentElement;
+    const tr = e.target.closest("tr");
+
+    // 부서 코드 얻어오기
+    const deptId = tr.children[1].innerText;
+
+    // JS에서 요청하기(GET)
+    location.href = "/department/update?deptId="+ deptId;
+
+
+
+  });
+
+
+})
 
 
