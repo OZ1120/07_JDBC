@@ -32,9 +32,10 @@
 		WHERE DEPT_ID = ?
 	</entry>
 	
+	
 	<entry key = "search">
 	SELECT * FROM DEPARTMENT4 
-WHERE DEPT_TITLE LIKE '%' || ? || '%'
+	WHERE DEPT_TITLE LIKE '%' || ? || '%'
 	</entry>
 	
 
