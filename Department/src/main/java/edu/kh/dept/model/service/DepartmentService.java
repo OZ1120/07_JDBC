@@ -22,6 +22,16 @@ public interface DepartmentService {
 	 * @return result(삽입된 행의 개수
 	 */
 	int insertDepartment(Department dept) throws DepartmentInsertException;
+
+	/**여러 부서 추가
+	 * @param deptList
+	 * @return result(삽입된 행의 개수)
+	 * @throws DepartmentInsertException
+	 */
+	int multiInsert(List<Department> deptList)throws DepartmentInsertException;
+
+	int deleteDepartment(String deptId) throws SQLException;
+
 	
 	
 	

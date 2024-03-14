@@ -111,5 +111,29 @@ public class DepartmentDAOImpl implements DepartmentDAO{
 		
 		return result;
 	}
+
+
+	@Override
+	public int deleteDepartment(Connection conn, String deptId) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteDepartment");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, deptId);
+			
+			result = pstmt.executeUpdate(); // DML 수행
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 }
+
