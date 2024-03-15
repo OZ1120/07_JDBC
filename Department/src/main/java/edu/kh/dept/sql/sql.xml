@@ -32,7 +32,7 @@
 		WHERE DEPT_ID = ?
 	</entry>
 	
-	
+	<!-- 부서명 검색 -->
 	<entry key = "search">
 	SELECT * FROM DEPARTMENT4 
 	WHERE DEPT_TITLE LIKE '%' || ? || '%'

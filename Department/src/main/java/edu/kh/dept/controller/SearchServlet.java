@@ -19,17 +19,22 @@ public class SearchServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
+			
 			// 서비스 객체 생성
 			DepartmentService service = new DepartmentServiceImpl();
 			
 			String keyword = req.getParameter("keyword"); // 검색어
 			
-			
+			// 여러행 검색 -> List										keyword 전달
 			List<Department> deptList = service.search(keyword);
+			
+			// 조회 결과를 request scope에 속성으로 세팅
 			req.setAttribute("deptList", deptList);
 			
 			// forward 할 JSP 경로
 			String path = "/WEB-INF/views/search.jsp";
+			
+			// 요청위임
 			req.getRequestDispatcher(path).forward(req, resp);
 			
 			

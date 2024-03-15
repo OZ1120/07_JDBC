@@ -50,6 +50,12 @@ public interface DepartmentDAO {
 	 */
 
 	
+	/** 부서명 검색
+	 * @param conn
+	 * @param keyword
+	 * @return deptList (조회결과 없으면 비어있음 - null 아님)
+	 * @throws SQLException
+	 */
 	List<Department> search(Connection conn, String keyword)throws SQLException;
 
 
