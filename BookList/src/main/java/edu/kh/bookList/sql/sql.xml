@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key = "selectAll">
+		SELECT BOOK_TITLE, BOOK_WRITER, 
+			TO_CHAR(READ_DATE, 'YYYY-MM-DD')  READ_DATE
+		FROM BOOKLIST
+	</entry>
+	
+	<entry key = "deledBook">
+		DELETE FROM BOOKLIST 
+		WHERE BOOK_TITLE = ?
+	</entry>
+
+
+
+</properties>
