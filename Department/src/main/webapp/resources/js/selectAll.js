@@ -27,6 +27,7 @@ for(let btn of deleteBtnList){ // 향상된 for문
     //   중에서 CSS 선택자가 일치하는 요소를 찾을 때 까지 검색
     //   일치하는 요소가 있으면 해당 요소 반환
 
+    
     const detpId = e.target.closest("tr").children[1].innerText;
 
     console.log(detpId);
