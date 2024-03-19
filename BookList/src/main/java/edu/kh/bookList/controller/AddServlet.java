@@ -11,39 +11,39 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/booklist/delete")
-public class DeleteServlet extends HttpServlet {
-	
-	
+@WebServlet ("/booklist/add")
+public class AddServlet extends HttpServlet{
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			// 서비스 객체 생성
+			
 			BookService service = new BookServiceImpl();
-			// 제출된 파라미터 얻어오기
+			
 			String bookTitle = req.getParameter("bookTitle");
-			// 서비스 메서드 호출 후 결과 반환 받기
-			int result = service.deleteBook(bookTitle);
+			String bookWriter = req.getParameter("bookWriter");
+			
+			int result = service.add(bookTitle,bookWriter);
 			
 			String message = null;
 			HttpSession session = req.getSession();
 			
-			// session 에 성공/실페 메세지 속성 추가
-			if(result >0) message = "삭제 성공";
-			else		message = "삭제 실패";
+			if(result>0) message = "책 추가 완료";
+			else message ="추가 실패";
 			
-			session.setAttribute("message", message);
+			session.setAttribute("messgae", message);
 			
 			String path = "/";
 			req.getRequestDispatcher(path).forward(req, resp);
 			
 			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 	}
-	
-	
-
 }

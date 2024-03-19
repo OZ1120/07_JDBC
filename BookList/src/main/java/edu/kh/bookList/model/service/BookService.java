@@ -16,8 +16,22 @@ public interface BookService {
 	 * @throws SQLException
 	 */
 	int deleteBook(String bookTitle) throws SQLException;
-	
 
-	
+	/** 책 검색
+	 * @param keyword
+	 * @return bookList
+	 * @throws SQLException
+	 */
+	List<BookList> search(String keyword) throws SQLException;
+
+	/** 책 추가
+	 * @param bookTitle
+	 * @param bookWriter
+	 * @return result
+	 * @throws SQLException
+	 */
+	int add(String bookTitle, String bookWriter) throws SQLException;
+
+	BookList selectBook(String bookTitle) throws SQLException;
 
 }

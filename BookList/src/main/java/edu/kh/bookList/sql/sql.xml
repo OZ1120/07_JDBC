@@ -8,11 +8,36 @@
 		FROM BOOKLIST
 	</entry>
 	
-	<entry key = "deledBook">
+	<entry key = "deleteBook">
 		DELETE FROM BOOKLIST 
 		WHERE BOOK_TITLE = ?
 	</entry>
 
-
+	<entry key = "search">
+		SELECT BOOK_TITLE, BOOK_WRITER, 
+			TO_CHAR(READ_DATE, 'YYYY-MM-DD')  READ_DATE
+		FROM BOOKLIST 
+		WHERE BOOK_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key = "add">
+		INSERT INTO BOOKLIST 
+		VALUES (?, ?, DEFAULT)
+	</entry>
+	
+	<entry key = "update">
+		UPDATE BOOKLIST 
+		SET BOOK_TITLE = ?,
+		   READ_DATE = DEFAULT
+		WHERE BOOK_TITLE =?
+	</entry>
+	
+	<!-- 수정 페이지 -->
+	<entry key = "add">
+		SELECT BOOK_TITLE,BOOK_WRITER
+		FROM BOOKLIST
+		WHERE BOOK_TITLE = ?
+	</entry>
+	
 
 </properties>

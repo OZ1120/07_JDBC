@@ -18,6 +18,24 @@ public interface BookDAO {
 	 */
 	int deleteBook(Connection conn, String bookTitle) throws SQLException;
 
-	
+	/** 책 검색
+	 * @param conn
+	 * @param keyword
+	 * @return
+	 * @throws SQLException
+	 */
+	List<BookList> search(Connection conn, String keyword) throws SQLException;
+
+	/** 책 추가
+	 * @param conn
+	 * @param bookTitle
+	 * @param bookWriter
+	 * @return
+	 * @throws SQLException
+	 */
+	int add(Connection conn, String bookTitle, String bookWriter) throws SQLException;
+
+	BookList selectBook(Connection conn, String bookTitle) throws SQLException;
+
 
 }

@@ -15,6 +15,15 @@ public class BookList {
 		this.bookWriter = bookWriter;
 		this.readDate = readDate;
 	}
+	
+	
+	public BookList(String bookTitle, String bookWriter) {
+		super();
+		this.bookTitle = bookTitle;
+		this.bookWriter = bookWriter;
+	}
+
+
 	public String getBookTitle() {
 		return bookTitle;
 	}

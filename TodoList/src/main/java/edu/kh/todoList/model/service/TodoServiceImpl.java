@@ -50,6 +50,7 @@ public class TodoServiceImpl implements TodoService {
 		return map;
 	}
 	
+	// 할일 추가
 	@Override
 	public int addTodo(String todoTitle, String todoContent) throws SQLException {
 
@@ -112,7 +113,7 @@ public class TodoServiceImpl implements TodoService {
 		return result;
 	}
 	
-	
+	// 삭제
 	@Override
 	public int deleteTodo(int todoNo) throws SQLException {
 
