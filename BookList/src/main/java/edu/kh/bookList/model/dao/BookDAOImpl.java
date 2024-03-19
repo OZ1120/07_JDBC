@@ -153,14 +153,16 @@ public class BookDAOImpl implements BookDAO  {
 			
 			if(rs.next()) {
 				
-				
+				book = new BookList(
+						rs.getString("BOOK_TITLE"),
+						rs.getString("BOOK_WRITER")
+						);
 			}
 			
 		} finally {
-			// TODO: handle finally clause
+			close(rs);
+			close(pstmt);
 		}
-		
-		
 		return book;
 	}
 	
