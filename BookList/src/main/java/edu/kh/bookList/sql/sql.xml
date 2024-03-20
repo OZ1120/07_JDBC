@@ -33,7 +33,7 @@
 	</entry>
 	
 	<!-- 수정 페이지 -->
-	<entry key = "add">
+	<entry key = "selectBook">
 		SELECT BOOK_TITLE,BOOK_WRITER
 		FROM BOOKLIST
 		WHERE BOOK_TITLE = ?

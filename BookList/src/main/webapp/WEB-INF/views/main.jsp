@@ -62,6 +62,6 @@
 
   <hr>
   
-
+  <Script src="/resources/js/update.js"></Script>
 </body>
 </html>

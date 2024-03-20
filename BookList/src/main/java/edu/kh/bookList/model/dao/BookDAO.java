@@ -35,10 +35,10 @@ public interface BookDAO {
 	 */
 	int add(Connection conn, String bookTitle, String bookWriter) throws SQLException;
 
-	/**
+	/** 수정 페이지
 	 * @param conn
 	 * @param bookTitle
-	 * @return
+	 * @return book
 	 * @throws SQLException
 	 */
 	BookList selectBook(Connection conn, String bookTitle) throws SQLException;

@@ -32,6 +32,11 @@ public interface BookService {
 	 */
 	int add(String bookTitle, String bookWriter) throws SQLException;
 
+	/** 수정 페이지
+	 * @param bookTitle
+	 * @return book
+	 * @throws SQLException
+	 */
 	BookList selectBook(String bookTitle) throws SQLException;
 
 }

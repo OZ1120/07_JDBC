@@ -56,11 +56,13 @@ WHERE BOOK_TITLE LIKE '%' || '해리포터' || '%';
 INSERT INTO BOOKLIST 
 VALUES ('?', '?', DEFAULT);
 
+SELECT *
+FROM BOOKLIST ;
 
 -- 도서 수정
 UPDATE BOOKLIST 
-SET BOOK_TITLE = "해리포터",
-   BOOK_WRITER = "글쓴이",
+SET BOOK_TITLE = '해리포터',
+   BOOK_WRITER = '글쓴이',
    READ_DATE = DEFAULT
-WHERE BOOK_TITLE = "해리포터와 아즈카반의죄수";
+WHERE BOOK_TITLE = '책1';
 
