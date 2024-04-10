@@ -1,11 +1,7 @@
 package edu.kh.dept.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
-import edu.kh.dept.model.dto.Department;
-import edu.kh.dept.model.exeption.DepartmentInsertException;
 import edu.kh.dept.model.service.DepartmentService;
 import edu.kh.dept.model.service.DepartmentServiceImpl;
 import jakarta.servlet.ServletException;
